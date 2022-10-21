@@ -93,31 +93,33 @@
 </script>
 
 <template>
-  <div v-if="city" class="h-screen relarive overflow-hidden">
-    <img :src="background" alt="" />
-    <div class="absolute w-full h-full top-0 overlay" />
-    <div class="absolute w-full h-full top-0 p-48">
-      <div class="flex justify-between">
-        <div>
-          <h1 class="text-7xl text-white">{{city.name}}</h1>
-          <p class="font-extralight text-2xl mt-2 text-white">{{today}}</p>
-          <img :src="`https://openweathermap.org/img/wn/${city.weather[0].icon}@4x.png`" class="w-56 -mt-11 -ml-11"
-            alt="atmostphere-icon">
+  <div v-if="city" class="my-auto mx-auto h-screen relative overflow-hidden">
+    <!-- <div class="md:flex"> -->
+      <img :src="background" alt="" class="h-full w-full object-cover md:h-full md:w-full"/>
+      <div class="absolute w-full h-full top-0 overlay" />
+      <div class="absolute w-full h-full top-0 p-12 md:p-48">
+        <div class="flex justify-between md:text-center">
+          <div>
+            <h1 class="text-7xl text-white">{{city.name}}</h1>
+            <p class="font-extralight text-2xl mt-2 text-white">{{today}}</p>
+            <img :src="`https://openweathermap.org/img/wn/${city.weather[0].icon}@4x.png`" class="w-56 -mt-11 -ml-11"
+              alt="atmostphere-icon">
+          </div>
+          <div>
+            <p class="text-5xl text-white font-extralight sm:text-7xl">
+              <!-- {{Math.round(city.main.temp - 273.15)}}°C -->
+              {{city.main.temp}}°C
+            </p>
+          </div>
         </div>
-        <div>
-          <p class="text-9xl text-white font-extralight">
-            <!-- {{Math.round(city.main.temp - 273.15)}}°C -->
-            {{city.main.temp}}°C
-          </p>
+  
+        <!-- search input -->
+        <div class="mt-20">
+          <input v-model="input" type="text" class="w-1/2 h-10 pl-2" placeholder="Search a place ...">
+          <button @click="handlerClickSearch" class="bg-sky-400 w-15 sm:w-20 text-white h-10">Search</button>
         </div>
       </div>
-
-      <!-- search input -->
-      <div class="mt-20">
-        <input v-model="input" type="text" class="w-1/2 h-10 pl-2" placeholder="Search a place ...">
-        <button @click="handlerClickSearch" class="bg-sky-400 w-20 text-white h-10">Search</button>
-      </div>
-    </div>
+    <!-- </div> -->
   </div>
   <div v-else class="p-10">
     <h1 class="text-7xl">Sorry, we can't find that place.</h1>
